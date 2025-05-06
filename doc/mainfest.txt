@@ -1,0 +1,13 @@
+{
+    "chrome_url_overrides": {
+        "newtab": "newtab.html" ==> with this code where ever new tab open chrome extension will get opened
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icons/search.png",
+        "48": "icons/search.png",
+        "128": "icons/search.png"
+      }
+    },
+}

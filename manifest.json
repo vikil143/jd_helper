@@ -1,0 +1,28 @@
+{
+    "manifest_version": 3,
+    "name": "Effective Job Search",
+    "version": "1.0",
+    "description": "A simple tool where we can effectively search for jobs.",
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icons/search.png",
+        "48": "icons/search.png",
+        "128": "icons/search.png"
+      }
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["job_search.js"],
+        "run_at": "document_idle"
+      }
+    ],
+    "icons": {
+      "16": "icons/search.png",
+      "48": "icons/search.png",
+      "128": "icons/search.png"
+    },
+    "permissions": []
+  }
+  
