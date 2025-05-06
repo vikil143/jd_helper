@@ -2,10 +2,9 @@ import { modal } from "./js/components/modal/main";
 import "./css/main.css";
 
 document.body.onload = function () {
-    document.body.style.backgroundColor = "red";
     modal().creatation({
         title: 'Test Modal',
-        c: document.createElement('div'),
+        content: document.createTextNode("This is a test modal content."),
         buttons: [
             {
                 text: 'OK',

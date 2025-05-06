@@ -12,10 +12,10 @@ export function modal() {
         return backdrop;
     }
 
-    function content() {
-        const c = document.createElement('div');
-        c.classList.add('ext-jd-modal-content');
-        return c;
+    function modalContent() {
+        const content = document.createElement('div');
+        content.classList.add('ext-jd-modal-content');
+        return content;
     }
 
     function header() {
@@ -26,14 +26,16 @@ export function modal() {
 
     return {
         // Need to consider types
-        creatation: ({ title, c, buttons }) => {
+        // Written normal function instead of arrow function to use 'this' keyword
+        // Need to consider types
+        creatation: function ({ title, content, buttons }){
             modal.innerHTML = '' // Clear previous content
             const backdrop = backDrop();
-            const modalContent = content();
-            const modalHeader = header();
+            const modalC = modalContent();
+            const modalH = header();
             const modalTitle = document.createElement('h2');
             modalTitle.innerText = title;
-            modalHeader.appendChild(modalTitle);
+            modalH.appendChild(modalTitle);
             const modalButtons = document.createElement('div');
             modalButtons.classList.add('ext-jd-modal-buttons');
             buttons.forEach((button) => {
@@ -41,23 +43,24 @@ export function modal() {
                 btn.innerText = button.text;
                 btn.onclick = () => {
                     button.onClick();
-                    modal.close();
+                    this.close(); // Close the modal after button click
                 };
                 modalButtons.appendChild(btn);
             });
             modal.appendChild(backdrop);
-            modal.appendChild(modalContent);
-            modalContent.appendChild(modalHeader);
-            modalContent.appendChild(c);
+            modal.appendChild(modalC);
+            modalC.appendChild(modalH);
+            modalC.appendChild(content);
+            modalC.appendChild(modalButtons);
             document.body.appendChild(modal)
         },
-        open: () => {
+        open: function () {
             const modal = document.querySelector('.ext-jd-modal');
             if (modal) {
                 modal.style.display = 'block';
             }
         },
-        close: () => {
+        close: function () {
             const modal = document.querySelector('.ext-jd-modal');
             if (modal) {
                 modal.remove();
