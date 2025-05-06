@@ -1,24 +1,32 @@
-import { modal } from "./js/components/modal/main";
 import "./css/main.css";
+import MenuWrapper from "./js/components/menu/main";
 
 document.body.onload = function () {
-    modal().creatation({
-        title: 'Test Modal',
-        content: document.createTextNode("This is a test modal content."),
-        buttons: [
-            {
-                text: 'OK',
-                onClick: () => {
-                    console.log('OK clicked');
-                },
-            },
-            {
-                text: 'Cancel',
-                onClick: () => {
-                    console.log('Cancel clicked');
-                },
-            },
-        ],
+    // HIgher Level Code
+    document.addEventListener("keyup", function (event) {
+        // Low Level Code 
+        const selection = window.getSelection();
+        const textSelection = selection.toString();
+        const selectedText = textSelection.trim();
+        if(selection.rangeCount > 0) {
+            if (event.shiftKey && event.code === 'KeyE') {
+                // document.body.style.backgroundColor = "red";
+                // Get the selected text range
+                const range = selection.getRangeAt(0);
+                const rect = range.getBoundingClientRect();
+                // Find the parent element
+                const menu = new MenuWrapper({ top: rect.top, left: rect.left });
+                menu.addMenuItem('Company Info', function() {
+                    console.log('Hello World clicked!', selectedText);
+                    menu.close()
+                });
+                menu.addMenuItem('Save Company', function() {
+                    console.log('Goodbye World clicked!');
+                    menu.close();
+                });
+
+                menu.open();                
+            }
+        }
     });
-    modal().open();
 }
