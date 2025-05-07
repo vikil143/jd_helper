@@ -1,4 +1,4 @@
-import "./css/main.css";
+import "./css/main.css"
 import { companySearchByGoogle } from "./js/api/company-search";
 import MenuWrapper from "./js/components/menu/main";
 
